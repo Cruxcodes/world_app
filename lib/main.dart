@@ -6,7 +6,7 @@ import 'package:world_app/pages/loading.dart';
 void main() {
   runApp(
     MaterialApp(
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: {
         '/': (context) => const Loading_Page(),
         '/home': (context) => Home(),

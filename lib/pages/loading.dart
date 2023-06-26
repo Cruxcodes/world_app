@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import 'package:world_app/services/world_time.dart';
 
 class Loading_Page extends StatefulWidget {
   const Loading_Page({Key? key}) : super(key: key);
@@ -8,10 +13,39 @@ class Loading_Page extends StatefulWidget {
 }
 
 class _Loading_PageState extends State<Loading_Page> {
+  void setupWorldTime() async {
+    WorldTime worldTime =
+        WorldTime(location: 'Berlin', urlPath: 'Africa/Lagos');
+    await worldTime.getTime();
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': worldTime.location,
+      'time': worldTime.time,
+      'dayTime' : worldTime.isDayTime,
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setupWorldTime();
+  }
+
   @override
   Widget build(BuildContext context) {
+    const spinkit = SpinKitWanderingCubes(
+      color: Colors.blue,
+      size: 100.0,
+    );
+
     return Scaffold(
-      body: Text('this is the loading screen'),
+      backgroundColor: Colors.grey,
+      body: SafeArea(
+        child: Center(
+
+          child: spinkit,
+        ),
+      ),
     );
   }
 }
