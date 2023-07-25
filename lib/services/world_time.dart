@@ -25,10 +25,10 @@ class WorldTime {
         //The .add is non destrcutive, which means it doesn't directly update it
         now = now.add(Duration(hours: int.parse(offset)));
 
-
         isDayTime = now.hour > 6 && now.hour < 20;
 
         time = DateFormat.jm().format(now);
+
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }

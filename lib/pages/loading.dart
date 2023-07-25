@@ -3,7 +3,9 @@ import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+
 import 'package:world_app/services/world_time.dart';
+import 'package:world_app/utilities/Colors.dart';
 
 class Loading_Page extends StatefulWidget {
   const Loading_Page({Key? key}) : super(key: key);
@@ -13,14 +15,14 @@ class Loading_Page extends StatefulWidget {
 }
 
 class _Loading_PageState extends State<Loading_Page> {
-  void setupWorldTime() async {
+  Future<void> setupWorldTime() async {
     WorldTime worldTime =
-        WorldTime(location: 'Berlin', urlPath: 'Africa/Lagos');
+        WorldTime(location: 'Lagos in Africa', urlPath: 'Africa/Lagos');
     await worldTime.getTime();
     Navigator.pushReplacementNamed(context, '/home', arguments: {
       'location': worldTime.location,
       'time': worldTime.time,
-      'dayTime' : worldTime.isDayTime,
+      'isDaytime' : worldTime.isDayTime,
     });
   }
 
@@ -42,7 +44,6 @@ class _Loading_PageState extends State<Loading_Page> {
       backgroundColor: Colors.grey,
       body: SafeArea(
         child: Center(
-
           child: spinkit,
         ),
       ),
